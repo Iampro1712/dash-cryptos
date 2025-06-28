@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🚀 CryptoDash | Real-time Crypto Analytics & Market Intelligence</title>
+    <meta name="description" content="Professional cryptocurrency dashboard with real-time market data, interactive charts, and advanced analytics. Track Bitcoin, Ethereum, and top cryptocurrencies.">
+    <meta name="keywords" content="cryptocurrency, bitcoin, ethereum, crypto dashboard, market analysis, real-time data">
+    <meta name="author" content="CryptoDash">
+    <meta property="og:title" content="CryptoDash - Real-time Crypto Analytics">
+    <meta property="og:description" content="Professional cryptocurrency dashboard with real-time market data and analytics">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CryptoDash - Real-time Crypto Analytics">
+    <meta name="twitter:description" content="Professional cryptocurrency dashboard with real-time market data and analytics">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen">
+    <div id="app" class="min-h-screen">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="header-container">
+          <div class="header-content">
+            <div class="brand-section">
+              <div class="logo-wrapper">
+                <div class="logo-icon">
+                  <span class="logo-symbol">₿</span>
+                </div>
+                <div class="logo-glow"></div>
+              </div>
+              <div class="brand-text">
+                <h1 class="brand-title">
+                  CryptoDash
+                </h1>
+                <p class="brand-subtitle">Real-time Crypto Analytics</p>
+              </div>
+            </div>
+            <div class="header-actions">
+              <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span class="status-text" id="lastUpdate">Cargando...</span>
+              </div>
+              <button id="refreshBtn" class="refresh-button">
+                <span class="refresh-icon">🔄</span>
+                <span class="refresh-text">Actualizar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="container mx-auto px-6 py-12">
+        <!-- Loading State -->
+        <div id="loading" class="text-center py-20">
+          <div class="loading-spinner mx-auto mb-8"></div>
+          <h2 class="text-2xl font-bold text-white mb-4">Cargando Dashboard</h2>
+          <p class="text-gray-300 text-lg">Obteniendo los últimos datos del mercado de criptomonedas...</p>
+          <div class="flex justify-center space-x-2 mt-6">
+            <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
+            <div class="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+            <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+          </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div id="dashboard" class="hidden space-y-12">
+          <!-- Market Overview Stats -->
+          <section class="market-overview-section animate-fade-in">
+            <!-- Section Header -->
+            <div class="overview-header">
+              <div class="header-main">
+                <div class="header-icon-wrapper">
+                  <div class="header-icon-bg">
+                    <span class="header-icon">🌍</span>
+                  </div>
+                </div>
+                <div class="header-content">
+                  <h2 class="overview-title">Resumen Global del Mercado</h2>
+                  <p class="overview-subtitle">Métricas clave y estadísticas en tiempo real del ecosistema crypto</p>
+                </div>
+              </div>
+              <div class="header-badge">
+                <div class="live-indicator">
+                  <div class="pulse-dot"></div>
+                  <span>EN VIVO</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-overview-grid">
+              <!-- Total Market Cap Card -->
+              <div class="stat-overview-card market-cap-card">
+                <div class="stat-header">
+                  <div class="stat-icon-wrapper">
+                    <div class="stat-icon market-cap-icon">
+                      <span>💎</span>
+                    </div>
+                  </div>
+                  <div class="stat-info">
+                    <h3 class="stat-title">Capitalización Total</h3>
+                    <p class="stat-description">Valor total del mercado crypto</p>
+                  </div>
+                </div>
+                <div class="stat-value-section">
+                  <div class="stat-main-value" id="totalMarketCap">$0</div>
+                  <div class="stat-change" id="marketCapChange">
+                    <span class="change-indicator">📈</span>
+                    <span class="change-value">+2.4%</span>
+                  </div>
+                </div>
+                <div class="stat-footer">
+                  <div class="stat-trend">
+                    <div class="trend-bar">
+                      <div class="trend-fill market-cap-trend"></div>
+                    </div>
+                    <span class="trend-label">Tendencia 7d</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Volume 24h Card -->
+              <div class="stat-overview-card volume-card">
+                <div class="stat-header">
+                  <div class="stat-icon-wrapper">
+                    <div class="stat-icon volume-icon">
+                      <span>📊</span>
+                    </div>
+                  </div>
+                  <div class="stat-info">
+                    <h3 class="stat-title">Volumen 24h</h3>
+                    <p class="stat-description">Actividad de trading diaria</p>
+                  </div>
+                </div>
+                <div class="stat-value-section">
+                  <div class="stat-main-value" id="totalVolume">$0</div>
+                  <div class="stat-change" id="volumeChange">
+                    <span class="change-indicator">📊</span>
+                    <span class="change-value">+8.7%</span>
+                  </div>
+                </div>
+                <div class="stat-footer">
+                  <div class="stat-trend">
+                    <div class="trend-bar">
+                      <div class="trend-fill volume-trend"></div>
+                    </div>
+                    <span class="trend-label">vs. promedio 7d</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BTC Dominance Card -->
+              <div class="stat-overview-card dominance-card">
+                <div class="stat-header">
+                  <div class="stat-icon-wrapper">
+                    <div class="stat-icon dominance-icon">
+                      <span>👑</span>
+                    </div>
+                  </div>
+                  <div class="stat-info">
+                    <h3 class="stat-title">Dominancia Bitcoin</h3>
+                    <p class="stat-description">Participación de BTC en el mercado</p>
+                  </div>
+                </div>
+                <div class="stat-value-section">
+                  <div class="stat-main-value" id="btcDominance">0%</div>
+                  <div class="stat-change" id="dominanceChange">
+                    <span class="change-indicator">₿</span>
+                    <span class="change-value">-0.3%</span>
+                  </div>
+                </div>
+                <div class="stat-footer">
+                  <div class="dominance-chart">
+                    <div class="dominance-bar">
+                      <div class="dominance-fill" id="dominanceFill"></div>
+                    </div>
+                    <div class="dominance-labels">
+                      <span>BTC</span>
+                      <span>Altcoins</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Top Cryptos Grid -->
+          <section class="animate-fade-in">
+            <div class="top-cryptos-header">
+              <h2 class="top-cryptos-title">Top Criptomonedas</h2>
+              <p class="top-cryptos-subtitle">Las criptomonedas más importantes por capitalización de mercado</p>
+            </div>
+            <div id="cryptoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+              <!-- Crypto cards will be inserted here -->
+            </div>
+          </section>
+
+          <!-- Market Analysis Section -->
+          <section class="market-analysis-section animate-fade-in">
+            <!-- Section Header -->
+            <div class="section-header">
+              <div class="header-content">
+                <div class="header-icon">
+                  <div class="icon-wrapper">
+                    <span class="icon-emoji">📊</span>
+                  </div>
+                </div>
+                <div class="header-text">
+                  <h2 class="section-title">Análisis de Mercado</h2>
+                  <p class="section-subtitle">Gráficos interactivos y análisis en tiempo real del mercado crypto</p>
+                </div>
+              </div>
+              <div class="header-stats">
+                <div class="stat-pill">
+                  <span class="stat-label">Actualización</span>
+                  <span class="stat-value">En vivo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+              <!-- Price Chart Card -->
+              <div class="chart-card price-chart-card">
+                <div class="chart-header">
+                  <div class="chart-info">
+                    <div class="chart-icon price-icon">
+                      <span>💰</span>
+                    </div>
+                    <div class="chart-details">
+                      <h3 class="chart-title">Precios en Tiempo Real</h3>
+                      <p class="chart-description">Top 8 criptomonedas por precio actual</p>
+                    </div>
+                  </div>
+                  <div class="chart-actions">
+                    <button class="action-btn" title="Actualizar datos">
+                      <span>🔄</span>
+                    </button>
+                    <button class="action-btn" title="Pantalla completa">
+                      <span>⛶</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="chart-wrapper">
+                  <canvas id="priceChart"></canvas>
+                </div>
+                <div class="chart-footer">
+                  <div class="chart-legend">
+                    <div class="legend-item">
+                      <div class="legend-color" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8)"></div>
+                      <span>Precio USD</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Market Cap Chart Card -->
+              <div class="chart-card market-cap-card">
+                <div class="chart-header">
+                  <div class="chart-info">
+                    <div class="chart-icon market-icon">
+                      <span>🏆</span>
+                    </div>
+                    <div class="chart-details">
+                      <h3 class="chart-title">Distribución de Mercado</h3>
+                      <p class="chart-description">Capitalización de mercado por crypto</p>
+                    </div>
+                  </div>
+                  <div class="chart-actions">
+                    <button class="action-btn" title="Cambiar vista">
+                      <span>👁️</span>
+                    </button>
+                    <button class="action-btn" title="Exportar">
+                      <span>📤</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="chart-wrapper">
+                  <canvas id="marketCapChart"></canvas>
+                </div>
+                <div class="chart-footer">
+                  <div class="market-summary">
+                    <div class="summary-item">
+                      <span class="summary-label">Total Market Cap</span>
+                      <span class="summary-value" id="totalMarketCap">$2.1T</span>
+                    </div>
+                    <div class="summary-item">
+                      <span class="summary-label">24h Change</span>
+                      <span class="summary-value positive" id="marketChange">+2.4%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Analytics -->
+            <div class="analytics-grid">
+              <div class="analytics-card trend-card">
+                <div class="analytics-header">
+                  <h4 class="analytics-title">Tendencias del Mercado</h4>
+                  <span class="trend-indicator bullish">📈 Alcista</span>
+                </div>
+                <div class="trend-metrics">
+                  <div class="metric">
+                    <span class="metric-label">Volumen 24h</span>
+                    <span class="metric-value">$89.2B</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Dominancia BTC</span>
+                    <span class="metric-value">42.1%</span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Fear & Greed</span>
+                    <span class="metric-value greed">76 (Codicia)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="analytics-card performance-card">
+                <div class="analytics-header">
+                  <h4 class="analytics-title">Rendimiento 24h</h4>
+                  <span class="performance-badge">🔥 Top Performers</span>
+                </div>
+                <div class="performance-list" id="topPerformers">
+                  <!-- Will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="main-footer">
+        <div class="footer-container">
+          <div class="footer-content">
+            <div class="footer-brand">
+              <div class="footer-logo">
+                <div class="footer-icon">
+                  <span class="footer-symbol">₿</span>
+                </div>
+                <div class="footer-glow"></div>
+              </div>
+              <div class="footer-text">
+                <h3 class="footer-title">CryptoDash</h3>
+                <p class="footer-subtitle">Real-time Crypto Analytics</p>
+              </div>
+            </div>
+            <div class="footer-info">
+              <div class="footer-credits">
+                <p class="credits-text">Datos proporcionados por CoinGecko API</p>
+                <div class="footer-meta">
+                  <span class="meta-item">Actualizado cada 60 segundos</span>
+                  <span class="meta-separator">•</span>
+                  <span class="meta-item">Hecho con <span class="heart">❤️</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="footer-line"></div>
+            <p class="copyright">© 2024 CryptoDash. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

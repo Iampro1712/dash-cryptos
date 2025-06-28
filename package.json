@@ -1,0 +1,46 @@
+{
+  "name": "dash-cryptos",
+  "version": "1.0.0",
+  "description": "Professional cryptocurrency dashboard with real-time market data, interactive charts, and advanced analytics",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite preview --port 4173"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Iampro1712/dash-cryptos.git"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "dashboard",
+    "bitcoin",
+    "ethereum",
+    "crypto",
+    "real-time",
+    "charts",
+    "analytics",
+    "coingecko",
+    "vite",
+    "javascript"
+  ],
+  "author": "Iampro1712",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Iampro1712/dash-cryptos/issues"
+  },
+  "homepage": "https://github.com/Iampro1712/dash-cryptos#readme",
+  "devDependencies": {
+    "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "autoprefixer": "^10.4.21",
+    "chart.js": "^4.5.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
+  }
+}
