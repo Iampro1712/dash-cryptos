@@ -34,7 +34,8 @@
   },
   "homepage": "https://github.com/Iampro1712/dash-cryptos#readme",
   "devDependencies": {
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "terser": "^5.24.0"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.11",
